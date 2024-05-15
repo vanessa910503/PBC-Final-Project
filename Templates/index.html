@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Finder</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding: 2rem;
+        }
+        .form-container {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .form-container h1 {
+            margin-top: 1.5rem; /* Adjust this value to increase the space */
+        }
+        .form-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .form-check {
+            width: 30%;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .form-control {
+            text-align: center; /* Center the text */
+            height: 40px; /* Adjust height for vertical centering */
+            line-height: 50px; /* Align text vertically */
+            border-radius: 30px;
+        }
+        .white-text {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1 class="text-center">Place Finder</h1>
+            <p class="text-center">Hi, welcome to place finder!</p>
+            <form action="{{ url_for('search_results') }}" method="POST" id="searchForm">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="location" name="location" placeholder="Enter Your Location" required>
+                </div>
+                <div class="form-group">
+                    <div class="form-check" style="margin-top: 2rem;">
+                        <input class="form-check-input" type="checkbox" name="place_type" id="restaurant" value="restaurant">
+                        <label class="form-check-label" for="restaurant">Restaurant</label>
+                    </div>
+                    <div class="form-check" style="margin-top: 2rem;">
+                        <input class="form-check-input" type="checkbox" name="place_type" id="cafe" value="cafe">
+                        <label class="form-check-label" for="cafe">Cafe</label>
+                    </div>
+                    <div class="form-check" style="margin-top: 2rem;">
+                        <input class="form-check-input" type="checkbox" name="place_type" id="bar" value="bar">
+                        <label class="form-check-label" for="bar">Bar<span class="white-text">g</span></label>
+                    </div>
+                    <div class="form-check" style="margin-top: 1rem;">
+                        <input class="form-check-input" type="checkbox" name="place_type" id="store" value="store">
+                        <label class="form-check-label" for="store">Store<span class="white-text">fjehe</span></label>
+                    </div>
+                    <div class="form-check" style="margin-top: 1rem;">
+                        <input class="form-check-input" type="checkbox" name="place_type" id="gym" value="gym">
+                        <label class="form-check-label" for="gym">Gym</label>
+                    </div>
+                    <div class="form-check" style="margin-bottom: 2rem; margin-top: 1rem;">
+                        <input class="form-check-input" type="checkbox" name="place_type" id="park" value="park">
+                        <label class="form-check-label" for="park">Park</label>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary" style="border-radius: 30px; margin-bottom: 1.5rem; width: 150px;">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

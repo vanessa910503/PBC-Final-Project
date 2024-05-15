@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Finder Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f7; /* Apple 官方配色 */
+        }
+        h1 {
+            color: #1d1d1f; /* Apple 官方配色 */
+            text-align: center;
+        }
+        .distance-item {
+            border: 2px solid #d1d1d6; /* Apple 官方配色 */
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 1.25rem; /* 放大字體 */
+        }
+        .distance-item p {
+            margin: 0;
+        }
+        .transport-mode {
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        .arrow-down {
+            text-align: center;
+            font-size: 2rem;
+            color: #a52a2a; /* 棕色 */
+            font-weight: bold;
+        }
+        .btn-secondary {
+            background-color: #007aff; /* Apple 官方藍色 */
+            border-color: #007aff; /* Apple 官方藍色 */
+        }
+        .btn-secondary:hover {
+            background-color: #005bb5; /* Apple 官方深藍色 */
+            border-color: #005bb5; /* Apple 官方深藍色 */
+        }
+        .vegan-coffee {
+            background-color: #f0f8ff; /* Apple 官方配色 */
+        }
+        .starbucks {
+            background-color: #faebd7; /* Apple 官方配色 */
+        }
+        .ho-tshu {
+            background-color: #ffefd5; /* Apple 官方配色 */
+        }
+        .kingstone {
+            background-color: #e6e6fa; /* Apple 官方配色 */
+        }
+        .fengshang {
+            background-color: #fffacd; /* Apple 官方配色 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Distances and Durations</h1>
+        <div id="distanceList" class="mb-3">
+            {% if distances %}
+            <div class="timeline">
+                {% for distance in distances %}
+                <div class="distance-item 
+                    {% if 'Vegan Coffee Shop' in distance.from or 'Vegan Coffee Shop' in distance.to %}vegan-coffee{% endif %}
+                    {% if 'STARBUCKS Xinhai Shop' in distance.from or 'STARBUCKS Xinhai Shop' in distance.to %}starbucks{% endif %}
+                    {% if 'HO TSHU HAVE A NICE DAY' in distance.from or 'HO TSHU HAVE A NICE DAY' in distance.to %}ho-tshu{% endif %}
+                    {% if 'Kingstone Books Tingzhou Store' in distance.from or 'Kingstone Books Tingzhou Store' in distance.to %}kingstone{% endif %}
+                    {% if 'Fengshang Coffee' in distance.from or 'Fengshang Coffee' in distance.to %}fengshang{% endif %}
+                ">
+                    <p>
+                        From {{ distance.from }} to {{ distance.to }}: {{ distance.distance }}, {{ distance.duration }}
+                        <span class="transport-mode">
+                            {% if distance.mode == 'driving' %}
+                            🚗
+                            {% elif distance.mode == 'walking' %}
+                            🚶
+                            {% elif distance.mode == 'bicycling' %}
+                            🚴
+                            {% elif distance.mode == 'transit' %}
+                            🚌
+                            {% endif %}
+                        </span>
+                    </p>
+                </div>
+                {% if not loop.last %}
+                <div class="arrow-down">↓</div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% else %}
+            <p>No distances calculated.</p>
+            {% endif %}
+        </div>
+        <div class="text-center">
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Search Engine</a>
+        </div>
+    </div>
+</body>
+</html>
